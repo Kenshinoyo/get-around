@@ -53,7 +53,7 @@ public class BlogController {
 		return ResponseEntity.ok(s);                 
 	}
 	
-	@GetMapping("/blogs/{userName}")
+	@GetMapping("/blogEntry/{userName}")
 	public List<BlogEntry> getBlogByUserName(@PathVariable String userName)
 	{	
 		List <BlogEntry> blogs=blogRepo.findByUserName(userName);
