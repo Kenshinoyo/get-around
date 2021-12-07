@@ -46,14 +46,14 @@ public class BlogController {
     }
 	
 	
-	@GetMapping("/blogEntry/{id}")
+	@GetMapping("/blogs/{id}")
 	public ResponseEntity<BlogEntry> getBlogById(@PathVariable int id)
 	{
 		BlogEntry s = blogRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Entry not found"));
 		return ResponseEntity.ok(s);                 
 	}
 	
-	@GetMapping("/blogEntry/{userName}")
+	@GetMapping("/blogs/{userName}")
 	public List<BlogEntry> getBlogByUserName(@PathVariable String userName)
 	{	
 		List <BlogEntry> blogs=blogRepo.findByUserName(userName);
@@ -65,7 +65,7 @@ public class BlogController {
 		return blogRepo.findByUserName(userName);
 	}
 	
-	@PutMapping("/blogEntry/{id}")
+	@PutMapping("/blogs/{id}")
 	public ResponseEntity<BlogEntry> updateBlogEntry(@PathVariable int id, @RequestBody BlogEntry blogEntry)
 	{
 		BlogEntry s= blogRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Entry not found"));
@@ -75,7 +75,7 @@ public class BlogController {
 	    return ResponseEntity.ok(updatedBlogEntry);
 	}
 	
-	@DeleteMapping("/blogentry/{id}")
+	@DeleteMapping("/blogs/{id}")
 	public String deleteBlogEntry(@PathVariable int id)
 	{
 		blogRepo.findById(id).orElseThrow(() ->  new ResourceNotFoundException("Entry not found"));

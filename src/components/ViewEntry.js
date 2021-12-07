@@ -3,6 +3,19 @@ import React, { useState, useEffect } from 'react';
 
 const ViewEntry = (props) => {
 
+    const [id, setID] = useState(props.match.params.id)
+    const [blogEntry, setBlogEntry] = useState({})
+
+    // - "Placeholder" state for JSON data
+    const [blogState, setBlogState] = useState({id, userName})
+
+    // - Acquires JSON data from back end and applies it for user viewing
+    useEffect()
+    {
+        DBridge.getBlogById(blogState.id).then((res) => {
+            setBlogState({blogEntry:res.data})
+        });
+    }
 
     return (
         <div>
@@ -14,11 +27,12 @@ const ViewEntry = (props) => {
                           <form>  
                               <div className="form-group">
                                 <label>ID#: </label>
-                                <input placeholder={props.state.Entry.id} readOnly={true} name="id" className="form-control" />
+                                <input placeholder={props.blogState.blogEntry.id} readOnly={true} name="id" className="form-control" />
                                </div>   
                                <div className="form-group">
-                                  <label> </label>
-                                  <input type="text" placeholder={ } readOnly={true} name=" " className="form-control" />                                                     
+                                  <label>User Name: </label>
+                                  <input placeholder={props.blogState.blogEntry.userName} readOnly={true} name="User Name" className="form-control" />
+                                </div>                                                   
                           </form>
                       </div>
                   </div>
