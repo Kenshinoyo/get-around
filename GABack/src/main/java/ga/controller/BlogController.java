@@ -27,7 +27,6 @@ public class BlogController {
 	private BlogRepository blogRepo;
     
 
-
 	//get all blog entries
 	
 	@GetMapping("/allblogs")

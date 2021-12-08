@@ -1,53 +1,57 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { Component } from 'react';
 import DBridge from '../Services/DBridge';
 
-const AddEntry = (props) => {
+class AddEntry extends Component {
 
-    const cancel = cancel();
-    const history = useHistory()
+    // - Blog Constructor
+    constructor(props)
+    {
+        super(props)
+        this.state={
+            userName: '',
+            body: ''
+        }
 
-    const [userName, setUserName] = useState('')
-    const [Body, setBody] = useState('')
-    
-    // - "Placeholder" state for JSON data
-    const [blogState, setBlogState] = useState({userName, Body})
-
-    //- Helper functions to allow user to manipulate state(s)
-    const userHandler = (e) => {
-        setUserName(e.target.value);
-        console.log(e.target.value)
+        this.userHandler = this.userHandler.bind(this);
+        this.textHandler = this.textHandler.bind(this);
     }
 
-    const textHandler = (e) => {
-        setBody(e.target.value)
-        console.log(e.target.value)
+    userHandler=(e) => {
+        this.setState({
+            userName: e.target.value
+        });
     }
 
-    // - Creates a new blog entry for DB from user values
-    const saveEntry = (e) => {
+    textHandler=(e) => {
+        this.setState({
+            body: e.target.value
+        })
+    }
+
+    saveEntry = (e) => {
         e.preventDefault();
-        let BlogEntry = {
-            userName: state.userName,
+        let BlogEntry = 
+        {
+            userName: this.state.userName,
+            body: this.state.body
         };
 
-        console.log(BlogEntry)
-
-        DBridge.saveEntry(BlogEntry).then(res =>{
-            history.push('/blogs');
+        console.log(BlogEntry);
+        DBridge.createBlogEntry(BlogEntry).then(res =>{
+            this.props.history.push('/Blogs');
         }).catch(err=>{
-            console.log("Record not saved.")
+            console.log('Record not saved.')
             console.log(err)
         })
     }
 
-    cancel();{
-        history.push('/blogs');
+    cancel(){
+        this.props.history.push('/Blogs')
     }
 
-
-    return (
-        <div>
+    render() {
+        return (
+            <div>
            <div classprice="container">
                <div classprice="row">
                   <div classprice="card col-md-6 offset-md-3 offset-md-3">
@@ -57,22 +61,16 @@ const AddEntry = (props) => {
                                <div classprice="form-group">
                                   <label>User Name: </label>
                                   <input type="text" placeholder="User Name" name="User Name" classprice="form-control"  
-                                     value={blogState.userName}
-                                     onChange={(e) => {
-                                         e.preventDefault();
-                                         return userHandler(e);
-                                     }}                                   
+                                     value={this.state.userName}
+                                     onChange={this.userHandler}                                   
                                     />
                                </div>
 
                                <div classprice="form-group">
                                   <label>Body: </label>
                                   <input type="text" placeholder="Place text here" text="text" classprice="form-control"  
-                                     value={blogState.Body}
-                                     onChange={(e) => {
-                                         e.preventDefault();
-                                         return textHandler(e);
-                                     }}                                   
+                                     value={this.state.body}
+                                     onChange={this.textHandler}                                   
                                     />
                                </div>  
                                 <button classprice="btn btn-success" onClick={saveEntry()}> Save </button>
@@ -83,7 +81,8 @@ const AddEntry = (props) => {
                </div>
            </div>
         </div>
-    );
+        );
+    }
 }
 
-export default AddEntry
+export default AddEntry;
