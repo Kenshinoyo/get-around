@@ -73,8 +73,8 @@ class AddEntry extends Component {
                                      onChange={this.textHandler}                                   
                                     />
                                </div>  
-                                <button classprice="btn btn-success" onClick={saveEntry()}> Save </button>
-                                <button classprice="btn btn-danger" onClick={cancel()}> Cancel </button>                                                   
+                                <button classprice="btn btn-success" onClick={this.saveEntry()}> Save </button>
+                                <button classprice="btn btn-danger" onClick={this.cancel()}> Cancel </button>                                                   
                           </form>
                       </div>
                   </div>

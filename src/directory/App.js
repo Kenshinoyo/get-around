@@ -1,12 +1,13 @@
 // This file is used for rendering everything the app needs and accesses. 
 
 import React from 'react';
-import { Switch, Route } from 'react-router-dom'; 
+import { Routes, Route } from 'react-router-dom';
 
 import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 
 import Home from './Home';
+import Blogs from './Blogs';
 
 import AddEntry from '../components/AddEntry';
 import UpdateEntry from '../components/UpdateEntry';
@@ -26,25 +27,16 @@ const App = () => {
      <NavBar />
       
 
-      <Switch> 
-        <Route exact path="/"> 
-          <Home />
-        </Route>
-        
-        <Route exact path="/allBlogs"> 
-          <Blogs />
-        </Route>
-
-        <Route exact path="/results"> 
-          <Results />
-        </Route>
+      <Routes> 
+        <Route path="/" element = {Home}/> 
+        <Route path="/allBlogs" element={Blogs}/>
 
         <Route exact path="/addblog" component = {AddEntry}/> 
         <Route exact path="/updateBlogEntry/:id" component = {UpdateEntry}/> 
         <Route exact path="/deleteBlogEntry/:id" component = {DeleteEntry}/>
         <Route exact path="/viewBlogEntry/:id" component = {ViewEntry}/>
 
-      </Switch>
+      </Routes>
 
       <Footer />
       
@@ -52,4 +44,4 @@ const App = () => {
   );
 }
 
-export default App;
+export default App

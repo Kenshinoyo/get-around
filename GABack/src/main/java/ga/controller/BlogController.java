@@ -29,7 +29,7 @@ public class BlogController {
 
 	//get all blog entries
 	
-	@GetMapping("/allblogs")
+	@GetMapping("/blogs")
 	public List<BlogEntry> getAllBlogs()
 	{
 		
